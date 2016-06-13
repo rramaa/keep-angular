@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app='keep'>
+<head>
+	<title>Keep</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/library/angular/angular.min.js"></script>
+	<script type="text/javascript" src="js/library/angular-sanitize/angular-sanitize.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/categories.js"></script>
+	<script type="text/javascript" src="js/controllers/notes.js"></script>
+</head>
+<body>
+<div ng-controller="categoriesController">
+	<input type="text" ng-model="newCategory" ng-keydown="detectEnter($event)"><button ng-click="addCat(newCategory)">Add Category</button>
+	<ul>
+		<li ng-repeat="category in categories">
+			<span ng-click="switchCat(category.id)">{{category.name}}</span>
+		</li>
+	</ul>
+</div>
+<div ng-controller="notesController">
+	<textarea ng-model="newNote" ng-keydown="detectShiftEnter($event)"></textarea><button ng-click="addNote(newNote)">Add Note</button>
+	<ul>
+		<li ng-repeat="note in notes">
+			<span ng-bind-html="filter(note.content)"></span>			
+		</li>
+	</ul>
+</div>
+</body>
+</html>
